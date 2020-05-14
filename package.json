@@ -1,6 +1,6 @@
 {
   "name": "@module-federation/automatic-vendor-federation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "AutomaticVendorFederation.js",
   "license": "MIT",
   "scripts": {

@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/module-federation/automatic-vendor-sharing/compare/v1.0.0...v1.0.1) (2020-05-14)
+
+
+### Bug Fixes
+
+* adding shareFrom ([df35664](https://github.com/module-federation/automatic-vendor-sharing/commit/df356644d0d7427c9b406492071c373963fd67f6))
+
 # 1.0.0 (2020-05-14)
 
 ### Bug Fixes
