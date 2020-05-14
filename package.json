@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "@module-federation/automatic-vendor-federation",
+  "version": "1.0.0",
+  "main": "AutomaticVendorFederation.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "echo noop",
+    "deploy": "echo noop",
+    "dev": "echo noop",
+    "setup": "echo noop",
+    "test": "echo noop",
+    "prettier": "prettier --write \"**/*.{js,json,md,ts,tsx}\"",
+    "prettier:check": "prettier --list-different \"**/*.{js,json,md,ts,tsx}\""
+  },
+  "peerDependencies": {
+    "webpack": "^5.0.0-beta.16"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5",
+    "webpack": "^5.0.0-beta.16"
+  }
+}
