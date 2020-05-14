@@ -1,13 +1,14 @@
 # automatic-vendor-sharing
 
 Utility to enable automatic vendor sharing within bundles using Module Federation
-#Install
+
+# Install
 
 ```shell script
 yarn install @module-federation/automatic-vendor-sharing -D
 ```
 
-#Usage
+# Usage
 There are a few arguments you can pass to the utility.
 `exclude` : allows you to filter out any packages including part of the string.
 `pkgJson` : pass your apps `package.json`: eg: `require("./package.json");`
