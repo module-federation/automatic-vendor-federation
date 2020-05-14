@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@module-federation/automatic-vendor-federation",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "main": "AutomaticVendorFederation.js",
   "license": "MIT",
   "scripts": {
