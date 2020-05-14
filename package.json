@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "@module-federation/automatic-vendor-federation",
   "version": "1.0.0",
   "main": "AutomaticVendorFederation.js",

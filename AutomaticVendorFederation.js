@@ -3,14 +3,24 @@ const AutomaticVendorFederation = ({
   ignoreVersion,
   packageJson,
   ignorePatchVersion = true,
+  shareFrom = ["dependencies"],
 }) => {
+  let combinedDependencies;
   if (!packageJson) {
     throw new Error(
       "AutomaticVendorFederation: You must pass the package.json file of your app"
     );
   }
-  const { dependencies, devDependencies } = packageJson;
-  const combinedDependencies = { ...dependencies, ...devDependencies };
+  if (shareFrom) {
+    if (!Array.isArray(shareFrom)) {
+      throw new Error("AutomaticVendorFederation: shareFrom must be an array");
+    }
+    combinedDependencies = shareFrom.reduce((acc, jsonKey) => {
+      Object.assign(acc, packageJson[jsonKey]);
+      return acc;
+    }, {});
+  }
+
   const shareableDependencies = Object.keys(combinedDependencies).filter(
     (dependency) => {
       if (exclude.some((dep) => dependency.includes(dep))) return false;
