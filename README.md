@@ -10,11 +10,11 @@ yarn install @module-federation/automatic-vendor-sharing -D
 
 # Usage
 There are a few arguments you can pass to the utility.
-`exclude` : allows you to filter out any packages including part of the string.
-`pkgJson` : pass your apps `package.json`: eg: `require("./package.json");`
-`ignoreVersion`: you can ignore versions on some shared packages. This utility supports versioned dependencies, which is a problem when using React as there can only be one version on the page
-`ignorePatchVersion` : ignore patch numbers and share dependencies based on a minor version matching. lodash-4.11 instead of lodash-4.11.7
-`shareFrom`: choose where in package.json the utility should share from. `['dependencies','peerDependencies']`/ (default: `dependencies`)
+* `exclude` : allows you to filter out any packages including part of the string.
+* `pkgJson` : pass your apps `package.json`: eg: `require("./package.json");`
+* `ignoreVersion`: you can ignore versions on some shared packages. This utility supports versioned dependencies, which is a problem when using React as there can only be one version on the page
+* `ignorePatchVersion` : ignore patch numbers and share dependencies based on a minor version matching. lodash-4.11 instead of lodash-4.11.7
+* `shareFrom`: choose where in package.json the utility should share from. `['dependencies','peerDependencies']`/ (default: `dependencies`)
 
 ```js
 const AutomaticVendorFederation = require("@module-federation/automatic-vendor-sharing");
