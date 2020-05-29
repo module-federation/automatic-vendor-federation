@@ -2,6 +2,8 @@
 
 Utility to enable automatic vendor sharing within bundles using Module Federation
 
+## This tool will be part of Webpack 5 core: https://github.com/webpack/webpack/pull/10960
+
 # Install
 
 ```shell script
