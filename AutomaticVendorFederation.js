@@ -1,3 +1,5 @@
+const path = require('path');
+
 const AutomaticVendorFederation = ({
   exclude,
   ignoreVersion,
@@ -28,7 +30,8 @@ const AutomaticVendorFederation = ({
     }
   );
   return shareableDependencies.reduce((shared, pkg) => {
-    let packageVersion = require(pkg + "/package.json").version.split(".");
+    const p = path.resolve(process.cwd(), 'node_modules');
+    let packageVersion = require(path.resolve(p, pkg + "/package.json")).version.split(".");
     if (ignorePatchVersion) {
       packageVersion.pop();
     }
