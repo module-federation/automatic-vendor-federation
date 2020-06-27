@@ -1,12 +1,14 @@
-const finder = require('find-package-json');
-const path = require('path')
+const finder = require("find-package-json");
+const path = require("path");
+const fs = require("fs");
+
 const AutomaticVendorFederation = ({
-  exclude,
-  ignoreVersion,
-  packageJson,
-  ignorePatchVersion = true,
-  shareFrom = ["dependencies"],
-}) => {
+                                     exclude,
+                                     ignoreVersion,
+                                     packageJson,
+                                     ignorePatchVersion = true,
+                                     shareFrom = ["dependencies"],
+                                   }) => {
   let combinedDependencies;
   if (!packageJson) {
     throw new Error(
@@ -31,12 +33,22 @@ const AutomaticVendorFederation = ({
   );
   return shareableDependencies.reduce((shared, pkg) => {
     let packageVersion;
-    try {
-      packageVersion = require(pkg + "/package.json").version.split(".");
-    } catch(e) {
-      const f = finder(path.dirname(pkg))
+    const packageExists = fs.existsSync(
+      path.join(path.dirname(require.resolve(pkg)), "/package.json")
+    );
+    if (packageExists) {
+      const resolvedPackage = path.join(
+        path.dirname(require.resolve(pkg)),
+        "/package.json"
+      );
+      packageVersion = require(resolvedPackage).version.split(".");
+    } else {
+      console.log("searching for package");
+      const f = finder(path.dirname(require.resolve(pkg)));
+      const jsonValue = f.next().value;
       packageVersion = require(f.next().filename).version.split(".");
     }
+    console.log(packageVersion);
     if (ignorePatchVersion) {
       packageVersion.pop();
     }
