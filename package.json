@@ -30,5 +30,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/module-federation/automatic-vendor-sharing.git"
+  },
+  "dependencies": {
+    "find-package-json": "^1.2.0"
   }
 }

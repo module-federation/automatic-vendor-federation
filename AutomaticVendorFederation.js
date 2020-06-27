@@ -1,3 +1,5 @@
+const finder = require('find-package-json');
+const path = require('path')
 const AutomaticVendorFederation = ({
   exclude,
   ignoreVersion,
@@ -28,11 +30,18 @@ const AutomaticVendorFederation = ({
     }
   );
   return shareableDependencies.reduce((shared, pkg) => {
-    let packageVersion = require(pkg + "/package.json").version.split(".");
+    console.log(f.next().filename);
+    let packageVersion;
+    try {
+      packageVersion = require(pkg + "/package.json").version.split(".");
+    } catch(e) {
+      const f = finder(path.dirname(pkg))
+      packageVersion = require(f.next().filename).version.split(".");
+    }
     if (ignorePatchVersion) {
       packageVersion.pop();
     }
-    if (ignoreVersion && ignoreVersion.includes(pkg)) {
+    if (ignoreVersion.includes(pkg)) {
       Object.assign(shared, { [pkg]: pkg });
     } else {
       Object.assign(shared, { [`${pkg}-${packageVersion.join(".")}`]: pkg });
@@ -41,4 +50,5 @@ const AutomaticVendorFederation = ({
     return shared;
   }, {});
 };
+
 module.exports = AutomaticVendorFederation;
