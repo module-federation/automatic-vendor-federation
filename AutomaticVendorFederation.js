@@ -30,7 +30,6 @@ const AutomaticVendorFederation = ({
     }
   );
   return shareableDependencies.reduce((shared, pkg) => {
-    console.log(f.next().filename);
     let packageVersion;
     try {
       packageVersion = require(pkg + "/package.json").version.split(".");
@@ -41,7 +40,7 @@ const AutomaticVendorFederation = ({
     if (ignorePatchVersion) {
       packageVersion.pop();
     }
-    if (ignoreVersion.includes(pkg)) {
+    if (ignoreVersion && ignoreVersion.includes(pkg)) {
       Object.assign(shared, { [pkg]: pkg });
     } else {
       Object.assign(shared, { [`${pkg}-${packageVersion.join(".")}`]: pkg });
