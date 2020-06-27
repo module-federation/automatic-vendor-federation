@@ -38,19 +38,16 @@ const AutomaticVendorFederation = ({
         path.join(path.dirname(require.resolve(pkg)), "/package.json")
       );
       if (packageExists) {
-        console.log('package exists')
         const resolvedPackage = path.join(
           path.dirname(require.resolve(pkg)),
           "/package.json"
         );
         packageVersion = require(resolvedPackage).version.split(".");
       } else {
-        console.log("searching for package");
         const f = finder(path.dirname(require.resolve(pkg)));
         const jsonValue = f.next().value;
-        packageVersion = require(f.next().filename).version.split(".");
+        packageVersion = jsonValue.version.split(".");
       }
-      console.log(packageVersion);
       if (ignorePatchVersion) {
         packageVersion.pop();
       }
