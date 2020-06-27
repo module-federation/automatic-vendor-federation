@@ -33,31 +33,35 @@ const AutomaticVendorFederation = ({
   );
   return shareableDependencies.reduce((shared, pkg) => {
     let packageVersion;
-    const packageExists = fs.existsSync(
-      path.join(path.dirname(require.resolve(pkg)), "/package.json")
-    );
-    if (packageExists) {
-      const resolvedPackage = path.join(
-        path.dirname(require.resolve(pkg)),
-        "/package.json"
+    try {
+      const packageExists = fs.existsSync(
+        path.join(path.dirname(require.resolve(pkg)), "/package.json")
       );
-      packageVersion = require(resolvedPackage).version.split(".");
-    } else {
-      console.log("searching for package");
-      const f = finder(path.dirname(require.resolve(pkg)));
-      const jsonValue = f.next().value;
-      packageVersion = require(f.next().filename).version.split(".");
+      if (packageExists) {
+        console.log('package exists')
+        const resolvedPackage = path.join(
+          path.dirname(require.resolve(pkg)),
+          "/package.json"
+        );
+        packageVersion = require(resolvedPackage).version.split(".");
+      } else {
+        console.log("searching for package");
+        const f = finder(path.dirname(require.resolve(pkg)));
+        const jsonValue = f.next().value;
+        packageVersion = require(f.next().filename).version.split(".");
+      }
+      console.log(packageVersion);
+      if (ignorePatchVersion) {
+        packageVersion.pop();
+      }
+      if (ignoreVersion && ignoreVersion.includes(pkg)) {
+        Object.assign(shared, {[pkg]: pkg});
+      } else {
+        Object.assign(shared, {[`${pkg}-${packageVersion.join(".")}`]: pkg});
+      }
+    } catch (e) {
+      return shared
     }
-    console.log(packageVersion);
-    if (ignorePatchVersion) {
-      packageVersion.pop();
-    }
-    if (ignoreVersion && ignoreVersion.includes(pkg)) {
-      Object.assign(shared, { [pkg]: pkg });
-    } else {
-      Object.assign(shared, { [`${pkg}-${packageVersion.join(".")}`]: pkg });
-    }
-
     return shared;
   }, {});
 };
