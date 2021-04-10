@@ -11,7 +11,7 @@ Utility to enable automatic vendor sharing within bundles using Module Federatio
 # Install
 
 ```shell script
-yarn install @module-federation/automatic-vendor-sharing -D
+yarn add @module-federation/automatic-vendor-sharing -D
 ```
 
 # Usage
