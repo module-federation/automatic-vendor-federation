@@ -24,7 +24,7 @@
     "@semantic-release/npm": "9.0.1",
     "@semantic-release/release-notes-generator": "10.0.3",
     "prettier": "2.0.5",
-    "semantic-release": "^17.0.7",
+    "semantic-release": "^19.0.3",
     "webpack": "5.0.0-beta.16"
   },
   "repository": {
